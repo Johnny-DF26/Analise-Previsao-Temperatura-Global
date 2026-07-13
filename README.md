@@ -21,8 +21,6 @@
 <img src="https://img.shields.io/badge/Prophet-1.1.6-purple?style=for-the-badge" />
 
 </div>
-
-</p>
 ---
 
 # 1. Visão Geral do Projeto
