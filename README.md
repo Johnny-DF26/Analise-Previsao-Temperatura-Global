@@ -5,12 +5,13 @@
 <img src="https://img.shields.io/badge/Status-In%20Progress-yellow?style=for-the-badge" />
 <img src="https://img.shields.io/badge/Python-3.12-blue?style=for-the-badge&logo=python&logoColor=white" />
 <img src="https://img.shields.io/badge/Google%20Colab-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white" />
+<img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" />
 
 <br>
 
-<img src="https://img.shields.io/badge/Machine%20Learning-Time%20Series-purple?style=for-the-badge" />
 <img src="https://img.shields.io/badge/Domain-Climate%20Data-orange?style=for-the-badge" />
-<img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" />
+<img src="https://img.shields.io/badge/Machine%20Learning-Time%20Series-purple?style=for-the-badge" />
+<img src="https://img.shields.io/badge/Matplotlib-3.10.0-11557c?style=for-the-badge&logo=plotly&logoColor=white" />
 
 <br>
 
