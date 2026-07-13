@@ -1,10 +1,11 @@
 # 🌡️ Projeto de Ciência de Dados: Análise e Previsão de Anomalias de Temperatura Global
 
 ![Status](https://img.shields.io/badge/Status-Incompleted-red)
-![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
-![Domain](https://img.shields.io/badge/Domain-Climate%20Data-orange)
+![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)
 ![Machine Learning](https://img.shields.io/badge/Machine%20Learning-Time%20Series-purple)
-
+![Google Colab](https://img.shields.io/badge/Google-Colab-F9AB00?logo=googlecolab)
+![Domain](https://img.shields.io/badge/Domain-Climate%20Data-orange)
+![License](https://img.shields.io/badge/license-MIT-blue)
 ---
 
 # 1. Visão Geral do Projeto
