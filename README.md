@@ -348,7 +348,7 @@ O AutoARIMA encontrou uma configuração otimizada pelo critério AIC, porém o 
 Clone o repositório:
 
 ```bash
-git clone <URL_DO_REPOSITORIO>
+git clone https://github.com/Johnny-DF26/Analise-Previsao-Temperatura-Global.git
 ```
 
 Instale as dependências:
@@ -372,7 +372,7 @@ jupyter notebook
 Cientista de Dados | Machine Learning | Inteligência Artificial
 
 🔗 GitHub:  
-<SEU_LINK>
+<https://github.com/Johnny-DF26>
 
 🔗 LinkedIn:  
-<SEU_LINK>
+<https://www.linkedin.com/in/datasciencejohnny/>
