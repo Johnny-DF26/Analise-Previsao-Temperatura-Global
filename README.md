@@ -1,58 +1,378 @@
-```markdown
-# Global Temperature Anomaly: Time Series Analysis & Forecasting
+# 🌡️ Projeto de Ciência de Dados: Análise e Previsão de Anomalias de Temperatura Global
 
-![Status](https://img.shields.io/badge/Status-Complete-green) 
+![Status](https://img.shields.io/badge/Status-Incompleted-red)
 ![Python](https://img.shields.io/badge/Python-3.10%2B-blue)
-![Target](https://img.shields.io/badge/Domain-Climate%20Change-orange)
-
-## 1. Executive Summary
-Este projeto desenvolve um pipeline robusto de ciência de dados para analisar e prever anomalias na temperatura média global (1850-2026). Utilizando dados históricos da fonte GCAG, o estudo identifica tendências de aquecimento acelerado e eventos climáticos cíclicos (El Niño/La Niña), culminando na implementação de modelos preditivos avançados.
-
-**Resultado Principal:** O modelo **Prophet** superou os modelos estatísticos clássicos (ARIMA/ETS), atingindo um **MAPE de 6.71%**, demonstrando alta confiabilidade para suporte à decisão em políticas ambientais e planejamento urbano.
-
-## 2. Business Context & Problem
-O aumento das anomalias térmicas impacta diretamente a segurança alimentar (agricultura), infraestrutura urbana e custos de energia. 
-*   **Objetivo:** Prever variações de temperatura com 12 meses de antecedência.
-*   **Impacto:** Auxiliar stakeholders na mitigação de riscos associados a eventos extremos.
-
-## 3. Tech Stack & Methodology
-*   **Data Wrangling:** Pandas, NumPy.
-*   **Statistical Tests:** Statsmodels (ADF Test, seasonal_decompose, ACF/PACF).
-*   **Modeling:** 
-    *   Holt-Winters (Exponential Smoothing)
-    *   SARIMA / Auto-ARIMA
-    *   Facebook Prophet
-*   **Metrics:** MAE, RMSE, MAPE.
-
-## 4. Pipeline Steps
-1.  **ETL & Cleaning:** Padronização de frequência temporal (`MS`) e tratamento de duplicatas.
-2.  **EDA (Exploratory Data Analysis):** 
-    *   Identificação de tendência secular crescente.
-    *   Análise de picos históricos (Super El Niño de 1877 e 2016).
-    *   Teste ADF confirmando não-estacionariedade ($p \approx 0.897$).
-3.  **Preprocessing:** Aplicação de diferenciação de primeira ordem para estabilizar a variância e média.
-4.  **Model Benchmarking:** Comparação sistemática entre modelos estatísticos e modernos.
-
-## 5. Model Performance
-
-| Model | MAE | RMSE | MAPE |
-| :--- | :---: | :---: | :---: |
-| 🥇 **Prophet** | **0.0692** | **0.0815** | **6.71%** |
-| 🥈 Exp. Smoothing | 0.1263 | 0.1374 | 12.88% |
-| 🥉 AutoARIMA | 0.1302 | 0.1418 | 13.30% |
-
-## 6. Key Insights
-*   **Aceleração Térmica:** A tendência de aquecimento tornou-se exponencial a partir da década de 80.
-*   **Resíduos:** O teste de Ljung-Box indicou que o Prophet capturou efetivamente a maior parte da informação temporal, deixando resíduos próximos ao ruído branco.
-*   **Eventos Extremos:** O modelo demonstrou resiliência ao lidar com anomalias causadas por fenômenos oscilatórios oceânicos.
-
-## 7. How to Reproduce
-1. Clone o repositório.
-2. Instale as dependências: `pip install -r requirements.txt`.
-3. Execute o notebook principal ou o script `main.py`.
+![Domain](https://img.shields.io/badge/Domain-Climate%20Data-orange)
+![Machine Learning](https://img.shields.io/badge/Machine%20Learning-Time%20Series-purple)
 
 ---
-**Author:** [Seu Nome]
-**Role:** Data Scientist
-**Contact:** [Seu LinkedIn/Email]
+
+# 1. Visão Geral do Projeto
+
+Este projeto apresenta um pipeline completo de **Ciência de Dados aplicado a séries temporais climáticas**, com o objetivo de analisar o comportamento histórico das **anomalias de temperatura média global entre 1850 e 2026** e desenvolver modelos capazes de realizar previsões futuras.
+
+Foram aplicadas técnicas de:
+
+- Análise Exploratória de Dados (EDA);
+- Decomposição de séries temporais;
+- Testes estatísticos;
+- Modelagem preditiva;
+- Avaliação e comparação de modelos.
+
+A base utilizada contém registros mensais de temperatura global, permitindo identificar:
+
+- tendência de aquecimento ao longo do tempo;
+- padrões sazonais;
+- oscilações climáticas;
+- períodos de comportamento anômalo.
+
+---
+
+# 2. Objetivo do Projeto
+
+Construir um modelo de previsão capaz de estimar a anomalia de temperatura global para os próximos **12 meses**, comparando diferentes abordagens estatísticas.
+
+A pergunta principal do projeto:
+
+> Qual modelo apresenta melhor capacidade preditiva para séries temporais climáticas?
+
+---
+
+# 3. Contexto do Problema
+
+As mudanças nas anomalias de temperatura global possuem impactos relevantes em diversas áreas:
+
+- 🌱 Agricultura e segurança alimentar;
+- 🏙️ Planejamento urbano;
+- ⚡ Demanda energética;
+- 🌎 Gestão de riscos ambientais.
+
+A previsão de variações climáticas auxilia na compreensão de tendências futuras e no planejamento estratégico.
+
+---
+
+# 4. Tecnologias Utilizadas
+
+## Linguagem
+
+- Python 3.10+
+
+## Manipulação de Dados
+
+- Pandas
+- NumPy
+
+## Visualização
+
+- Matplotlib
+- Seaborn
+
+## Estatística e Séries Temporais
+
+- Statsmodels
+
+Utilizados:
+
+- Teste Dickey-Fuller Aumentado (ADF);
+- ACF e PACF;
+- Seasonal Decompose;
+- SARIMAX.
+
+## Modelos Preditivos
+
+- Holt-Winters (Exponential Smoothing);
+- SARIMA;
+- AutoARIMA;
+- Prophet.
+
+## Métricas
+
+Avaliação utilizando:
+
+- MAE (Mean Absolute Error);
+- RMSE (Root Mean Squared Error);
+- MAPE (Mean Absolute Percentage Error).
+
+---
+
+# 5. Pipeline do Projeto
+
+## 5.1 Aquisição e Preparação dos Dados
+
+Etapas realizadas:
+
+- carregamento da base histórica;
+- conversão da variável temporal;
+- criação do índice temporal;
+- ajuste da frequência mensal (`MS`);
+- validação de dados ausentes;
+- organização da série temporal.
+
+---
+
+# 5.2 Análise Exploratória dos Dados (EDA)
+
+A primeira etapa consistiu em compreender o comportamento da série antes da modelagem.
+
+Foram analisados:
+
+## Tendência
+
+A série apresentou crescimento contínuo das anomalias de temperatura ao longo do período analisado.
+
+Foi observado um aumento mais acentuado principalmente a partir das últimas décadas.
+
+---
+
+## Sazonalidade
+
+A decomposição temporal indicou a presença de padrões sazonais recorrentes.
+
+A sazonalidade representa comportamentos que se repetem em determinados períodos, neste caso, aproximadamente anual.
+
+---
+
+## Análise de Anomalias
+
+As anomalias foram identificadas utilizando os resíduos da decomposição.
+
+A análise dos resíduos permite encontrar pontos que apresentam comportamento diferente do esperado após remover:
+
+- tendência;
+- sazonalidade.
+
+Esses eventos podem estar relacionados a fenômenos climáticos naturais, como:
+
+- El Niño;
+- La Niña;
+- outros eventos extremos.
+
+---
+
+# 6. Análise Estatística
+
+## Teste Dickey-Fuller Aumentado (ADF)
+
+O teste foi utilizado para verificar a estacionariedade da série.
+
+Resultado:
+
 ```
+p-value = 0.897
+```
+
+Interpretação:
+
+Como o p-valor foi superior a 0.05, não foi possível rejeitar a hipótese de não estacionariedade.
+
+A série apresenta tendência, sendo necessário avaliar técnicas como diferenciação para modelos estatísticos baseados em estacionariedade.
+
+---
+
+# Autocorrelação
+
+Foram utilizados:
+
+## ACF (Autocorrelation Function)
+
+Objetivo:
+
+- identificar dependência entre valores passados e atuais;
+- auxiliar na escolha dos parâmetros dos modelos ARIMA.
+
+---
+
+## PACF (Partial Autocorrelation Function)
+
+Objetivo:
+
+- identificar influência direta dos valores anteriores;
+- auxiliar na escolha do parâmetro `p`.
+
+---
+
+# 7. Modelagem
+
+Foram avaliados diferentes modelos de previsão.
+
+---
+
+# 7.1 Exponential Smoothing (Holt-Winters)
+
+Modelo estatístico baseado em:
+
+- nível;
+- tendência;
+- sazonalidade.
+
+Resultado:
+
+```
+MAE  : 0.1263
+RMSE : 0.1374
+MAPE : 12.88%
+```
+
+---
+
+# 7.2 SARIMA
+
+Modelo estatístico que combina:
+
+- AutoRegressão (AR);
+- Média Móvel (MA);
+- Diferenciação;
+- Componente sazonal.
+
+Configuração inicial:
+
+```
+SARIMA(1,1,1)(1,1,1,12)
+```
+
+Resultado:
+
+```
+MAE  : 0.1589
+RMSE : 0.1683
+MAPE : 16.13%
+```
+
+---
+
+# 7.3 AutoARIMA
+
+O AutoARIMA realizou busca automática dos melhores parâmetros.
+
+Modelo encontrado:
+
+```
+ARIMA(3,1,1)(1,0,1)[12]
+```
+
+Resultado:
+
+```
+MAE  : 0.1302
+RMSE : 0.1418
+MAPE : 13.30%
+```
+
+---
+
+# 7.4 Prophet
+
+Modelo desenvolvido para séries temporais com:
+
+- tendência;
+- sazonalidade;
+- mudanças de comportamento ao longo do tempo.
+
+Resultado:
+
+```
+MAE  : 0.0692
+RMSE : 0.0815
+MAPE : 6.71%
+```
+
+---
+
+# 8. Comparação dos Modelos
+
+| Modelo | MAE | RMSE | MAPE |
+|---|---:|---:|---:|
+| 🥇 Prophet | **0.0692** | **0.0815** | **6.71%** |
+| Exponential Smoothing | 0.1263 | 0.1374 | 12.88% |
+| AutoARIMA | 0.1302 | 0.1418 | 13.30% |
+| SARIMA | 0.1589 | 0.1683 | 16.13% |
+
+---
+
+# 9. Principais Insights
+
+## Tendência Climática
+
+A análise histórica revelou uma tendência crescente das anomalias de temperatura global, indicando mudanças significativas no comportamento climático ao longo dos anos.
+
+---
+
+## Melhor Modelo
+
+O modelo **Prophet apresentou o melhor desempenho preditivo**, reduzindo significativamente os erros quando comparado aos modelos estatísticos clássicos avaliados.
+
+O modelo conseguiu capturar melhor:
+
+- tendência de longo prazo;
+- sazonalidade anual;
+- mudanças graduais na série.
+
+---
+
+## Avaliação Estatística x Previsão
+
+Um ponto importante observado durante o projeto:
+
+> O modelo com melhor ajuste estatístico não necessariamente apresenta a melhor previsão futura.
+
+O AutoARIMA encontrou uma configuração otimizada pelo critério AIC, porém o Prophet apresentou menor erro nos dados de teste.
+
+---
+
+# 10. Estrutura do Projeto
+
+```
+📂 Previsao_Temperatura_Global
+
+│
+├── 📂 data
+│   └── monthly_temperature.csv
+│
+├── 📂 notebooks
+│   └── analise_temporal.ipynb
+│
+├── 📂 images
+│   ├── decomposicao.png
+│   ├── prophet_forecast.png
+│   └── model_comparison.png
+│
+├── requirements.txt
+│
+└── README.md
+```
+
+---
+
+# 11. Como Executar
+
+Clone o repositório:
+
+```bash
+git clone <URL_DO_REPOSITORIO>
+```
+
+Instale as dependências:
+
+```bash
+pip install -r requirements.txt
+```
+
+Execute o notebook:
+
+```bash
+jupyter notebook
+```
+
+---
+
+# 12. Autor
+
+**Johnny**
+
+Cientista de Dados | Machine Learning | Inteligência Artificial
+
+🔗 GitHub:  
+<SEU_LINK>
+
+🔗 LinkedIn:  
+<SEU_LINK>
