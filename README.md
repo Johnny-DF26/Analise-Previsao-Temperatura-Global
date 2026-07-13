@@ -1,11 +1,28 @@
 # 🌡️ Projeto de Ciência de Dados: Análise e Previsão de Anomalias de Temperatura Global
 
-![Status](https://img.shields.io/badge/Status-Incompleted-red)
-![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)
-![Machine Learning](https://img.shields.io/badge/Machine%20Learning-Time%20Series-purple)
-![Google Colab](https://img.shields.io/badge/Google-Colab-F9AB00?logo=googlecolab)
-![Domain](https://img.shields.io/badge/Domain-Climate%20Data-orange)
-![License](https://img.shields.io/badge/license-MIT-blue)
+<div align="center">
+
+<img src="https://img.shields.io/badge/Status-In%20Progress-yellow?style=for-the-badge" />
+<img src="https://img.shields.io/badge/Python-3.12-blue?style=for-the-badge&logo=python&logoColor=white" />
+<img src="https://img.shields.io/badge/Google%20Colab-F9AB00?style=for-the-badge&logo=googlecolab&logoColor=white" />
+
+<br>
+
+<img src="https://img.shields.io/badge/Machine%20Learning-Time%20Series-purple?style=for-the-badge" />
+<img src="https://img.shields.io/badge/Domain-Climate%20Data-orange?style=for-the-badge" />
+<img src="https://img.shields.io/badge/License-MIT-blue?style=for-the-badge" />
+
+<br>
+
+<img src="https://img.shields.io/badge/Pandas-2.2.2-150458?style=for-the-badge&logo=pandas&logoColor=white" />
+<img src="https://img.shields.io/badge/NumPy-2.0.2-013243?style=for-the-badge&logo=numpy&logoColor=white" />
+<img src="https://img.shields.io/badge/Statsmodels-0.14.4-blue?style=for-the-badge" />
+<img src="https://img.shields.io/badge/Scikit--Learn-1.5.2-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white" />
+<img src="https://img.shields.io/badge/Prophet-1.1.6-purple?style=for-the-badge" />
+
+</div>
+
+</p>
 ---
 
 # 1. Visão Geral do Projeto
