@@ -1,6 +1,6 @@
-# 🌡️ Projeto de Ciência de Dados: Análise e Previsão de Anomalias de Temperatura Global
-
 <div align="center">
+  
+# 🌡️ Projeto de Ciência de Dados: Análise e Previsão de Anomalias de Temperatura Global
 
 <img src="https://img.shields.io/badge/Status-In%20Progress-yellow?style=for-the-badge" />
 <img src="https://img.shields.io/badge/Python-3.12-blue?style=for-the-badge&logo=python&logoColor=white" />
