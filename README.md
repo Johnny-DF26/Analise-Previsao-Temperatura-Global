@@ -96,10 +96,24 @@ Utilizados:
 
 ## Modelos Preditivos
 
+Foram avaliadas diferentes abordagens para previsão de séries temporais:
+
+### Modelos Estatísticos
+
 - Holt-Winters (Exponential Smoothing);
 - SARIMA;
-- AutoARIMA;
+- AutoARIMA.
+
+### Modelos Especializados em Séries Temporais
+
 - Prophet.
+
+### Machine Learning
+
+- XGBoost Regressor;
+- LightGBM Regressor.
+
+Os modelos de Machine Learning foram aplicados após a transformação da série temporal em um problema supervisionado através de engenharia de atributos.
 
 ## Métricas
 
@@ -206,14 +220,51 @@ Objetivo:
 - auxiliar na escolha do parâmetro `p`.
 
 ---
+# 7. Engenharia de Atributos (Feature Engineering)
 
-# 7. Modelagem
+Para utilizar modelos de Machine Learning, a série temporal foi transformada em um problema supervisionado.
 
-Foram avaliados diferentes modelos de previsão.
+Foram criadas variáveis baseadas no histórico da própria série:
+
+## Lags
+
+Capturam dependência temporal:
+
+- `lag_1`: valor do mês anterior;
+- `lag_3`: três meses anteriores;
+- `lag_6`: seis meses anteriores;
+- `lag_12`: mesmo período do ano anterior.
+
+## Estatísticas Móveis
+
+Foram utilizadas janelas temporais para capturar comportamento recente:
+
+- `rolling_mean_3`;
+- `rolling_mean_12`;
+- `rolling_std_12`.
+
+## Tendência
+
+- `tendencia_12m`;
+- `expanding_mean`.
+
+## Variáveis Temporais
+
+Extração de informações do calendário:
+
+- ano;
+- mês;
+- trimestre.
+
+Essa etapa permitiu que modelos baseados em árvores identificassem padrões temporais sem a necessidade de assumir estacionariedade.
+
+# 8. Modelagem
+
+Foram avaliados modelos estatísticos, modelos específicos para séries temporais e algoritmos de Machine Learning.
 
 ---
 
-# 7.1 Exponential Smoothing (Holt-Winters)
+# 8.1 Exponential Smoothing (Holt-Winters)
 
 Modelo estatístico baseado em:
 
@@ -231,7 +282,7 @@ MAPE : 12.88%
 
 ---
 
-# 7.2 SARIMA
+# 8.2 SARIMA
 
 Modelo estatístico que combina:
 
@@ -240,7 +291,7 @@ Modelo estatístico que combina:
 - Diferenciação;
 - Componente sazonal.
 
-Configuração inicial:
+Resultado:
 
 ```
 SARIMA(1,1,1)(1,1,1,12)
@@ -256,9 +307,9 @@ MAPE : 16.13%
 
 ---
 
-# 7.3 AutoARIMA
+# 8.3 AutoARIMA
 
-O AutoARIMA realizou busca automática dos melhores parâmetros.
+O AutoARIMA realizou busca automática dos parâmetros:
 
 Modelo encontrado:
 
@@ -276,13 +327,13 @@ MAPE : 13.30%
 
 ---
 
-# 7.4 Prophet
+# 8.4 Prophet
 
 Modelo desenvolvido para séries temporais com:
 
 - tendência;
 - sazonalidade;
-- mudanças de comportamento ao longo do tempo.
+- mudanças de comportamento.
 
 Resultado:
 
@@ -292,17 +343,53 @@ RMSE : 0.0815
 MAPE : 6.71%
 ```
 
----
+# 8.5 XGBoost
 
-# 8. Comparação dos Modelos
+Após engenharia de atributos, foi aplicado um modelo baseado em Gradient Boosting.
+
+O modelo foi otimizado utilizando:
+
+- TimeSeriesSplit;
+- RandomizedSearchCV;
+- ajuste de hiperparâmetros.
+
+Resultado:
+
+```
+MAE : 0.0540
+RMSE : 0.0639
+MAPE : 5.46%
+```
+
+# 8.6 LightGBM
+
+O LightGBM apresentou o melhor desempenho entre todos os modelos avaliados.
+
+Foi utilizado:
+
+- validação cruzada temporal;
+- tuning de hiperparâmetros;
+- análise de importância das variáveis.
+
+Resultado:
+
+```
+MAE : 0.0375
+RMSE : 0.0420
+MAPE : 3.81%
+```
+
+---
+# 9. Comparação dos Modelos
 
 | Modelo | MAE | RMSE | MAPE |
 |---|---:|---:|---:|
-| 🥇 Prophet | **0.0692** | **0.0815** | **6.71%** |
+| 🥇 LightGBM | **0.0375** | **0.0420** | **3.81%** |
+| 🥈 XGBoost | 0.0540 | 0.0639 | 5.46% |
+| 🥉 Prophet | 0.0692 | 0.0815 | 6.71% |
 | Exponential Smoothing | 0.1263 | 0.1374 | 12.88% |
 | AutoARIMA | 0.1302 | 0.1418 | 13.30% |
 | SARIMA | 0.1589 | 0.1683 | 16.13% |
-
 ---
 
 # 9. Principais Insights
@@ -315,27 +402,46 @@ A análise histórica revelou uma tendência crescente das anomalias de temperat
 
 ## Melhor Modelo
 
-O modelo **Prophet apresentou o melhor desempenho preditivo**, reduzindo significativamente os erros quando comparado aos modelos estatísticos clássicos avaliados.
+O **LightGBM apresentou o melhor desempenho preditivo**, alcançando:
+```
+MAPE: 3.81%
+```
 
-O modelo conseguiu capturar melhor:
+O modelo superou abordagens estatísticas tradicionais e o Prophet devido à capacidade de capturar relações não lineares entre:
 
-- tendência de longo prazo;
-- sazonalidade anual;
-- mudanças graduais na série.
-
----
-
-## Avaliação Estatística x Previsão
-
-Um ponto importante observado durante o projeto:
-
-> O modelo com melhor ajuste estatístico não necessariamente apresenta a melhor previsão futura.
-
-O AutoARIMA encontrou uma configuração otimizada pelo critério AIC, porém o Prophet apresentou menor erro nos dados de teste.
+- valores históricos;
+- tendências;
+- variações anuais;
+- comportamento recente da série.
 
 ---
 
-# 10. Estrutura do Projeto
+## Importância das Features
+
+As principais variáveis utilizadas pelo modelo foram:
+
+- `lag_1`;
+- `diff_12`;
+- `tendencia_12m`;
+- `rolling_mean_3`;
+- `rolling_std_12`.
+
+Isso demonstra que o comportamento recente e as variações anuais possuem grande influência na previsão da temperatura.
+---
+# 10. Previsão Futura
+
+Após a seleção do melhor modelo, foi realizada uma previsão recursiva para os próximos 12 meses.
+
+O processo consiste em:
+
+1. gerar as features futuras;
+2. realizar a previsão do próximo período;
+3. utilizar a previsão como entrada para o próximo passo;
+4. repetir o processo até completar o horizonte de 12 meses.
+
+O resultado é uma projeção temporal baseada no histórico disponível.
+
+# 11. Estrutura do Projeto
 
 ```
 📂 Previsao_Temperatura_Global
@@ -359,7 +465,7 @@ O AutoARIMA encontrou uma configuração otimizada pelo critério AIC, porém o 
 
 ---
 
-# 11. Como Executar
+# 12. Como Executar
 
 Clone o repositório:
 
@@ -381,7 +487,7 @@ jupyter notebook
 
 ---
 
-# 12. Autor
+# 13. Autor
 
 **Johnny**
 
